@@ -1,0 +1,5 @@
+#Ignore files to copy inside the container
+volumes
+venv
+__pycache__
+.vscode

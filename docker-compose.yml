@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  web:
+    build: .      
+    restart: always
+    command: flask run -h 0.0.0.0    
+    #TODO: Problem with sqlite and volumes
+    # volumes:
+    #   - ./volumes/db/:/usr/src/app/db
+    ports:
+      - 5000:5000    
