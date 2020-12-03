@@ -1,6 +1,7 @@
 #Custom rules
 volumes/
 .DS_Store
+*.bat
 
 ##Visual Studio Code Rules ---------
 .vscode/*
