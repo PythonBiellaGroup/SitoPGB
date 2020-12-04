@@ -50,7 +50,6 @@ def before_request():
         if not current_user.confirmed \
                 and request.endpoint \
                 and request.blueprint != 'auth' \
-                # Issue #2
                 and request.endpoint != 'main.index' \
                 and request.endpoint != 'serate.prossime' \
                 and request.endpoint != 'corsi.lista' \
