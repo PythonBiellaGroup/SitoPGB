@@ -196,19 +196,18 @@ class Utente(UserMixin, db.Model):
             .filter(Follow.follower_id == self.id)
 
 
+    '''
+    # Per la gestione API - Serializing Resources to JSON
     def to_json(self):
         json_user = {
-            'url': url_for('api.get_user', id=self.id),
+            'url': url_for('api.get_utente', id=self.id),
             'username': self.username,
             'member_since': self.member_since,
-            'last_seen': self.last_seen
-            'posts_url': url_for('api.get_user_posts', id=self.id),
-            'followed_posts_url': url_for('api.get_user_followed_posts',
-                                          id=self.id),
+            'last_seen': self.last_seen,
+            'posts_url': url_for('api.get_posts_utente', id=self.id),
             'post_count': self.posts.count()
         }
         return json_user
-    '''
     
     def generate_auth_token(self, expiration):
         s = Serializer(current_app.config['SECRET_KEY'],

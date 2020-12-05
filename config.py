@@ -31,6 +31,11 @@ class Config(object):
     # Per la paginazione
     PBG_COMMENTS_PER_PAGE = 5
     PBG_POSTS_PER_PAGE = 5
+    # Per evitare errore modulo API (AttributeError: 'Request' object has no attribute 'is_xhr')
+    # https://stackoverflow.com/a/63974534
+    # TODO - Analisi approfondita - Credo dipenda dalla versione di Werkzeug
+    JSONIFY_PRETTYPRINT_REGULAR = False
+
 
     @staticmethod
     def init_app(app):

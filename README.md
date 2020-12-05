@@ -64,7 +64,7 @@ Per lanciare invece il docker contenente l'applicazione è necessario lanciare i
 docker-compose build
 docker-compose up -d
 ```
-Dopo di che raggiungere l'indirizzo: http://localhos:5000 per visualizzare l'applicazione all'interno del docker container.
+Dopo di che raggiungere l'indirizzo: http://localhost:5000 per visualizzare l'applicazione all'interno del docker container.
 
 Per visualizzare i logs se dovessero esserci errori con docker: 
 ```

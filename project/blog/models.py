@@ -26,18 +26,20 @@ class Post(db.Model):
             markdown(value, output_format='html'),
             tags=allowed_tags, strip=True))
 
+    # Per la gestione API - Serializing Resources to JSON
     def to_json(self):
         json_post = {
             'url': url_for('api.get_post', id=self.id),
             'body': self.body,
             'body_html': self.body_html,
             'timestamp': self.timestamp,
-            'author_url': url_for('api.get_user', id=self.author_id),
+            'author_url': url_for('api.get_utente', id=self.author_id),
             'comments_url': url_for('api.get_post_comments', id=self.id),
             'comment_count': self.comments.count()
         }
         return json_post
 
+    # Per la gestione API - Serializing Resources from JSON
     @staticmethod
     def from_json(json_post):
         body = json_post.get('body')
