@@ -52,7 +52,7 @@ class Serata(db.Model):
             ("Flask 6", "Blueprints, refactoring e tests con Mario", datetime.datetime(2020, 11, 16, hour=20), 'https://zoom.us/j/99953652561?pwd=NFpGVzBJazJXOW5MMEQvNFBrVnNLUT09', 'https://vimeo.com/480155611'),
             ("Flask 7", "Autenticazione con Mario", datetime.datetime(2020, 11, 23, hour=20), 'https://zoom.us/j/95155339456?pwd=Zk1wcVViazMvdkt0SlhJZENyZ0Iydz09', 'https://vimeo.com/483066531'),
             ("Flask 8", "Profili, ruoli e blog con Mario", datetime.datetime(2020, 11, 30, hour=20), 'https://zoom.us/j/98250996690?pwd=UzhPUFRHUjJmdy9uWWNKUDBCak5rQT09', 'https://vimeo.com/485810324'),
-            ("Flask 9", "Deploy in produzione con Andrea", datetime.datetime(2020, 12, 7, hour=20), '', ''),
+            ("Flask 9", "Deploy in produzione con Andrea", datetime.datetime(2020, 12, 7, hour=20), 'https://zoom.us/j/98193137080?pwd=bWFEVm9obEZNc2Rjb2tqSXhTS0xkQT09', ''),
             ("Flask 10", "REST API con sorpresa", datetime.datetime(2020, 12, 14, hour=20), '', ''),
         ]
         corso_flask = Corso.query.filter_by(nome="Flask").first()
