@@ -1,4 +1,6 @@
 from enum import Enum
+from flask import url_for
+
 from project import db
 from project.tags.models import Tag
 
@@ -79,6 +81,22 @@ class Corso(db.Model):
             self.stato_corso,
             self.link_materiale
         )
+
+
+    # Per la gestione API - Serializing Resources to JSON
+    def to_json(self):
+        json_corso = {
+            'id': self.id,
+            'nome': self.nome,
+            'insegnante': self.insegnante,
+            'livello': self.livello,
+            'stato_corso': self.stato_corso,
+            'link_materiale': self.link_materiale,
+            #'tags_url': url_for('api.get_tags', id=self.author_id),
+            'serate_url': url_for('api.get_serate_corso', id=self.id)
+        }
+        return json_corso
+
 
     '''
     Utile per i test (sempre)
