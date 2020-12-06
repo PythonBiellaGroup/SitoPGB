@@ -43,3 +43,10 @@ def get_serate_corso(id):
     return jsonify({
         'serate': [s.to_json() for s in c.serate]
     })
+
+@api.route('/corsi/<int:id>/tags/')
+def get_tags_corso(id):
+    c = Corso.query.get_or_404(id)
+    return jsonify({
+        'tags': [t.to_json() for t in c.tags]
+    })

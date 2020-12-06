@@ -92,11 +92,10 @@ class Corso(db.Model):
             'livello': self.livello,
             'stato_corso': self.stato_corso,
             'link_materiale': self.link_materiale,
-            #'tags_url': url_for('api.get_tags', id=self.author_id),
+            'tags_url': url_for('api.get_tags_corso', id=self.id),
             'serate_url': url_for('api.get_serate_corso', id=self.id)
         }
         return json_corso
-
 
     '''
     Utile per i test (sempre)
