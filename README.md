@@ -92,6 +92,9 @@ docker run -d --name sitopgb_web_test -p 5000:5000 -e "FLASK_APP=app.py" -e "FLA
 Per lanciare il progetto con docker compose in modalità di produzione è sufficiente fare
 ```
 docker-compose -f docker-compose.prod.yml up -d --build
+
+#To remove containers
+docker-compose -f docker-compose.prod.yml down -v
 ```
 
 Per lanciare il DB di Postgres generando le tabelle in locale è necessario fare da terminale:

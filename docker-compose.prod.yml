@@ -5,10 +5,10 @@ services:
     build: .      
     restart: always    
     command: gunicorn --bind 0.0.0.0:5000 project:app 
-    ports:
-      - 5000:5000
+    expose:
+      - 5000  
     env_file:
-      - ./dev.env
+      - ./prod.env
     depends_on:
       - db
   db:
@@ -19,6 +19,13 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./dev_db.env
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
     
 volumes:
   postgres_data:

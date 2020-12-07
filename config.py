@@ -53,29 +53,11 @@ class Config(object):
 
 class ProdConfig(Config):
 
-    TESTING = os.environ.get("TESTING")
-    DEBUG = os.environ.get("DEBUG")
-
-    SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = os.environ.get("SECRET_KEY") or "supersupersupersecretkey"
-
-    # Supportata recaptcha v.2
-    RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY")
-    RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
-
-    # Mail
-    MAIL_SERVER = os.environ.get("MAIL_SERVER")
-    MAIL_PORT = os.environ.get("MAIL_PORT")
-    MAIL_USE_TLS = os.environ.get("MAIL_USE_TLS") in ["true", "on", "1"]
-    # Costanti usati nelle mail registrazione utenti
-    PBG_MAIL_SUBJECT_PREFIX = os.environ.get("PBG_MAIL_SUBJECT_PREFIX")
-    PBG_MAIL_SENDER = os.environ.get("PBG_MAIL_SENDER")
-    # Definizione email dell'utente ADMIN iniziale
-    PBG_ADMIN = os.environ.get("PBG_ADMIN")
-    # Per la paginazione
-    PBG_COMMENTS_PER_PAGE = 5
-    PBG_POSTS_PER_PAGE = 5
+    # overwrite config for production environment
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
+    MAIL_DEBUG = False
+    DEBUG = False
 
 
 class ProdSqliteConfig(ProdConfig):
