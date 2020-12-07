@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+print(basedir)
 
 
 class Config(object):
@@ -61,8 +62,9 @@ class ProdConfig(Config):
 
 
 class ProdSqliteConfig(Config):
+
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-        basedir, "db", "data.sqlite"
+        basedir, "data.sqlite"
     ) or os.environ.get("SQLALCHEMY_DATABASE_URI")
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
@@ -82,12 +84,14 @@ class DevConfig(Config):
     MAIL_USE_SSL = False
 
 
-class DevSqliteConfig(DevConfig):
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "db", "data.sqlite")
-    DEBUG = True
-    # Consiglio di usare https://mailtrap.io/ - Registrati
+class DevSqliteConfig(Config):
+
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "data.sqlite")
+    # overwrite config for production environment
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
+    MAIL_DEBUG = False
+    DEBUG = True
 
 
 class TestConfig(Config):

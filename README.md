@@ -97,7 +97,7 @@ docker-compose -f docker-compose.prod.yml up -d --build
 docker-compose -f docker-compose.prod.yml down -v
 ```
 
-Per lanciare il DB di Postgres generando le tabelle in locale è necessario fare da terminale:
+Per **popolare il db Postgres** generando le tabelle in locale è necessario fare da terminale:
 ```
 #Mac or Linux
 export FLASK_CONFIG="development" && export FLASK_APP="app.py" && export DEBUG=True & flask create_db
@@ -107,7 +107,16 @@ set FLASK_CONFIG="development" && set FLASK_APP="app.py" & set DEBUG=True & flas
 
 ```
 
-Per lanciare il progetto in locale in modalità sviluppo dopo aver generato le tabelle sul db di postgres è possibile fare da terminale:
+Per **popolare il database SQLite** al posto di Postgres è necessario fare
+```
+#Mac o Linux
+export FLASK_CONFIG="developmentsqlite" & export FLASK_APP="app.py" & export DEBUG=True & flask create_db
+
+#Windows
+set FLASK_CONFIG="developmentsqlite" && set FLASK_APP="app.py" & set DEBUG=True & flask create_db
+```
+
+Per **lanciare il progetto in locale in modalità sviluppo** dopo aver generato le tabelle sul db di **postgres** è possibile fare da terminale:
 ```
 #Mac e Linux
 export FLASK_CONFIG="development" && export FLASK_APP="app.py" && flask run -h 0.0.0.0
@@ -115,13 +124,10 @@ export FLASK_CONFIG="development" && export FLASK_APP="app.py" && flask run -h 0
 set FLASK_CONFIG="development" && set FLASK_APP="app.py" && flask run -h 0.0.0.0
 ```
 
-Per lanciare il progetto con sql lite è necessario ricordarsi di settare la variabile di ambiente:
-- FLASK_CONFIG='developmentsqlite'
-
-Un esempio:
+Per **lanciare il progetto in locale in modalità sviluppo** dopo aver generato le tabelle sul db **sqlite** è possibile fare da terminale:
 ```
-#lanciare creazione del db
-export FLASK_CONFIG="developmentsqlite" && export FLASK_APP="app.py" && export DEBUG=True & flask create_db
-#lanciare applicazione
-export FLASK_CONFIG="developmentsqlite" && export FLASK_APP="app.py" && flask run -h 0.0.0.0
+#Mac e Linux
+export FLASK_CONFIG="developmentsqlite" & export FLASK_APP="app.py" & flask run -h 0.0.0.0
+#Windows
+set FLASK_CONFIG="developmentsqlite" && set FLASK_APP="app.py" && flask run -h 0.0.0.0
 ```

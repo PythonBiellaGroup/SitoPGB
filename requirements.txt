@@ -21,3 +21,4 @@ black
 flask-httpauth==4.2.0
 gunicorn==20.0.4
 manage
+python-dotenv
