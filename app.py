@@ -86,13 +86,13 @@ def create_db():
     from faker import Faker
 
     try:
-        course_list = Corso.query.all()
         user_list = Utente.query.all()
+        course_list = Corso.query.all()
         post_list = Post.query.all()
         comment_list = Comment.query.all()
-        ruolo_list = Ruolo.query.all()
         post_list = Post.query.all()
-        print("Data already in the DB with tables")
+        ruolo_list = Ruolo.query.all()
+        print("DB Tables already exists")
 
     except Exception as message:
         print(f"No db data exist, inserting them:")
@@ -145,6 +145,7 @@ def create_db():
 
         print("Creating structure")
         db.create_all()
+        db.session.commit()
 
         print("Creating roles")
         Ruolo.insert_roles()

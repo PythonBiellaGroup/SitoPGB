@@ -56,10 +56,7 @@ class ProdConfig(Config):
     TESTING = os.environ.get("TESTING")
     DEBUG = os.environ.get("DEBUG")
 
-    SQLALCHEMY_DATABASE_URI = (
-        "postgresql://pbgadmin:SUPERpswd42..@db:5432/pbg"
-        or os.environ.get("SQLALCHEMY_DATABASE_URI")
-    )
+    SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get("SECRET_KEY") or "supersupersupersecretkey"
 
@@ -90,7 +87,10 @@ class ProdSqliteConfig(ProdConfig):
 
 class DevConfig(Config):
     # SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "db", "data.sqlite")
-    SQLALCHEMY_DATABASE_URI = "postgresql://pbgadmin:SUPERpswd42..@localhost:5432/pbg"
+    SQLALCHEMY_DATABASE_URI = (
+        os.environ.get("SQLALCHEMY_DATABASE_URI")
+        or "postgresql://pbgadmin:SUPERpswd42..@localhost:5432/pbg"
+    )
     DEBUG = True
     # Consiglio di usare https://mailtrap.io/ - Registrati
     MAIL_USE_TLS = True

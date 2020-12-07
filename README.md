@@ -67,6 +67,12 @@ Per lanciare invece il docker contenente l'applicazione è necessario lanciare i
 ```
 docker-compose build
 docker-compose up -d
+
+#è anche possibile lanciare i due comandi assieme facendo:
+docker-compose up -d --build
+
+#per rimuovere i container quando sono stati creati e buildati è possibile fare:
+docker-compose down -v
 ```
 Dopo di che raggiungere l'indirizzo: http://localhost:5000 per visualizzare l'applicazione all'interno del docker container.
 
@@ -76,9 +82,16 @@ Per visualizzare i logs se dovessero esserci errori con docker:
 docker ps -a
 #consente di visualizzare i log di errore
 docker logs -t <nomecontainer> 
+#per visualizzare tutto lo storico dei messaggi
+docker logs -f <nomecontainer>
 
 #per lanciare direttamente il dockerfile dopo averlo buildato (a scopo di test)
 docker run -d --name sitopgb_web_test -p 5000:5000 -e "FLASK_APP=app.py" -e "FLASK_ENV=production" sitopgb_web flask run /usr/src/app/app.py --host 0.0.0.0
+```
+
+Per lanciare il progetto con docker compose in modalità di produzione è sufficiente fare
+```
+docker-compose -f docker-compose.prod.yml up -d --build
 ```
 
 Per lanciare il DB di Postgres generando le tabelle in locale è necessario fare da terminale:
@@ -86,9 +99,16 @@ Per lanciare il DB di Postgres generando le tabelle in locale è necessario fare
 #Mac or Linux
 export FLASK_CONFIG="development" & export FLASK_APP="app.py" & export DEBUG=True & flask create_db
 
+#Windows
+set FLASK_CONFIG="development" && set FLASK_APP="app.py" & set DEBUG=True & flask create_db
+
 ```
 
 Per lanciare il progetto in locale in modalità sviluppo dopo aver generato le tabelle sul db di postgres è possibile fare da terminale:
 ```
-export FLASK_CONFIG=development & export FLASK_APP=app.py & flask run -h 0.0.0.0
+#Mac e Linux
+export FLASK_CONFIG="development" & export FLASK_APP="app.py" & flask run -h 0.0.0.0
+#Windows
+set FLASK_CONFIG="development" && set FLASK_APP="app.py" && flask run -h 0.0.0.0
 ```
+

@@ -24,5 +24,8 @@ COPY . /usr/src/app/
 #remember to set permissions to the file: chmod +x ./entrypoint.sh
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 
+RUN echo $FLASK_CONFIG
+RUN echo $DB
+
 
 
