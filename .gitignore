@@ -1,6 +1,7 @@
 #Custom rules
 volumes/
 .DS_Store
+develop.sh
 
 #Settings files for environments
 *.bat

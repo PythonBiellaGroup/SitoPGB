@@ -1,11 +1,15 @@
-set RECAPTCHA_PUBLIC_KEY=6LcxL_UZAAAAAGOEzIQRc_zPaNQVub35WiR1utkE
-set RECAPTCHA_PRIVATE_KEY=6LcxL_UZAAAAAJn7gapJSqOPuB_MT13-VoBCPUmP
-set FLASK_APP=app.py
-set FLASK_CONFIG=development
-set SECRET_KEY=supersupersecretkey
-set MAIL_USE_TLS=true
-set MAIL_SERVER=smtp.mailtrap.io
-set MAIL_USERNAME=9a973adb59007f
-set MAIL_PASSWORD=4f5fd306232d45
-set MAIL_PORT=2525
-set PBG_ADMIN=burlesco70@test.it
+#!/bin/sh
+
+export RECAPTCHA_PUBLIC_KEY="6LcxL_UZAAAAAGOEzIQRc_zPaNQVub35WiR1utkE"
+export RECAPTCHA_PRIVATE_KEY="6LcxL_UZAAAAAJn7gapJSqOPuB_MT13-VoBCPUmP"
+export FLASK_APP="app.py"
+export FLASK_CONFIG="development"
+export SECRET_KEY="supersupersecretkey"
+export MAIL_USE_TLS="true"
+export MAIL_SERVER="smtp.mailtrap.io"
+export MAIL_USERNAME="9a973adb59007f"
+export MAIL_PASSWORD="4f5fd306232d45"
+export MAIL_PORT="2525"
+export PBG_ADMIN="burlesco70@test.it"
+export DEBUG="True"
+export TESTING="False"

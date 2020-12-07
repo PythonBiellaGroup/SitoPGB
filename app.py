@@ -20,8 +20,8 @@ from flask import render_template
 from flask_migrate import Migrate
 
 
-app = create_app(os.getenv("FLASK_CONFIG") or "default")
-print(f"Using {os.getenv('FLASK_CONFIG')} ")
+app = create_app()
+
 # Create db and migrations
 Migrate(app, db)
 

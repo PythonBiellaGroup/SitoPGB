@@ -89,7 +89,6 @@ class ProdSqliteConfig(ProdConfig):
 
 
 class DevConfig(Config):
-    print("Using dev Config with Postgres")
     # SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "db", "data.sqlite")
     SQLALCHEMY_DATABASE_URI = "postgresql://pbgadmin:SUPERpswd42..@localhost:5432/pbg"
     DEBUG = True
@@ -99,8 +98,6 @@ class DevConfig(Config):
 
 
 class DevSqliteConfig(DevConfig):
-    print("Using Dev Config with SQLite")
-
     def __init__(self):
         super.__init__.SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
             basedir, "db", "data.sqlite"
@@ -108,7 +105,6 @@ class DevSqliteConfig(DevConfig):
 
 
 class TestConfig(Config):
-    print("Using Test Config")
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
         basedir, "db", "testdata.sqlite"
     )
@@ -127,4 +123,5 @@ config = {
     "production": ProdConfig,
     "production_sqlite": ProdSqliteConfig,
     "default": DevConfig,
+    "None": DevConfig,
 }
