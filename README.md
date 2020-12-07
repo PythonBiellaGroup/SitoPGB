@@ -110,10 +110,10 @@ set FLASK_CONFIG="development" && set FLASK_APP="app.py" & set DEBUG=True & flas
 Per **popolare il database SQLite** al posto di Postgres è necessario fare
 ```
 #Mac o Linux
-export FLASK_CONFIG="development_sqlite" & export FLASK_APP="app.py" & export DEBUG=True & flask create_db
+export FLASK_CONFIG="developmentsqlite" & export FLASK_APP="app.py" & export DEBUG=True & flask create_db
 
 #Windows
-set FLASK_CONFIG="development_lite" && set FLASK_APP="app.py" & set DEBUG=True & flask create_db
+set FLASK_CONFIG="developmentsqlite" && set FLASK_APP="app.py" & set DEBUG=True & flask create_db
 ```
 
 Per **lanciare il progetto in locale in modalità sviluppo** dopo aver generato le tabelle sul db di **postgres** è possibile fare da terminale:
@@ -127,8 +127,11 @@ set FLASK_CONFIG="development" && set FLASK_APP="app.py" && flask run -h 0.0.0.0
 Per **lanciare il progetto in locale in modalità sviluppo** dopo aver generato le tabelle sul db **sqlite** è possibile fare da terminale:
 ```
 #Mac e Linux
-export FLASK_CONFIG="development_sqlite" & export FLASK_APP="app.py" & flask run -h 0.0.0.0
+export FLASK_CONFIG="developmentsqlite" & export FLASK_APP="app.py" & flask run -h 0.0.0.0
 #Windows
-set FLASK_CONFIG="development_sqlite" && set FLASK_APP="app.py" && flask run -h 0.0.0.0
+set FLASK_CONFIG="developmentsqlite" && set FLASK_APP="app.py" && flask run -h 0.0.0.0
 ```
 
+heroku run export FLASK_CONFIG="development_sqlite" & export FLASK_APP="app.py" & export DEBUG=True & flask create_db --app pbg-pro
+
+heroku run export FLASK_CONFIG="development_sqlite" & export FLASK_APP="app.py" & export DEBUG=True & flask run --app pbg-pro

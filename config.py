@@ -64,7 +64,7 @@ class ProdConfig(Config):
 class ProdSqliteConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-        basedir, "db", "data.sqlite"
+        basedir, "data.sqlite"
     ) or os.environ.get("SQLALCHEMY_DATABASE_URI")
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
@@ -86,7 +86,7 @@ class DevConfig(Config):
 
 class DevSqliteConfig(Config):
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "db", "data.sqlite")
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "data.sqlite")
     # overwrite config for production environment
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
@@ -108,10 +108,10 @@ class TestConfig(Config):
 
 config = {
     "development": DevConfig,
-    "development_sqlite": DevSqliteConfig,
+    "developmentsqlite": DevSqliteConfig,
     "testing": TestConfig,
     "production": ProdConfig,
-    "production_sqlite": ProdSqliteConfig,
+    "productionsqlite": ProdSqliteConfig,
     "default": DevConfig,
     "None": DevConfig,
 }
