@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+print(basedir)
 
 
 class Config(object):
@@ -60,11 +61,15 @@ class ProdConfig(Config):
     DEBUG = False
 
 
-class ProdSqliteConfig(ProdConfig):
-    def __init__(self):
-        super.__init__.SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-            basedir, "db", "data.sqlite"
-        ) or os.environ.get("SQLALCHEMY_DATABASE_URI")
+class ProdSqliteConfig(Config):
+
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
+        basedir, "db", "data.sqlite"
+    ) or os.environ.get("SQLALCHEMY_DATABASE_URI")
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
+    MAIL_DEBUG = False
+    DEBUG = False
 
 
 class DevConfig(Config):
@@ -79,11 +84,14 @@ class DevConfig(Config):
     MAIL_USE_SSL = False
 
 
-class DevSqliteConfig(DevConfig):
-    def __init__(self):
-        super.__init__.SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-            basedir, "db", "data.sqlite"
-        )
+class DevSqliteConfig(Config):
+
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "db", "data.sqlite")
+    # overwrite config for production environment
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
+    MAIL_DEBUG = False
+    DEBUG = True
 
 
 class TestConfig(Config):
