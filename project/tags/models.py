@@ -13,6 +13,13 @@ class Tag(db.Model):
 
     def __repr__(self):
         return "<Tag '{}'>".format(self.name)
+
+    # Per la gestione API - Serializing Resources to JSON
+    def to_json(self):
+        json_tag = {
+            'tag': self.name
+        }
+        return json_tag
     
     '''
     Utile per il popolamento dei dati e per i test

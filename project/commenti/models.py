@@ -26,6 +26,7 @@ class Comment(db.Model):
             markdown(value, output_format='html'),
             tags=allowed_tags, strip=True))
 
+    # Per la gestione API - Serializing Resources to JSON
     def to_json(self):
         json_comment = {
             'url': url_for('api.get_comment', id=self.id),
@@ -33,10 +34,11 @@ class Comment(db.Model):
             'body': self.body,
             'body_html': self.body_html,
             'timestamp': self.timestamp,
-            'author_url': url_for('api.get_user', id=self.author_id),
+            'author_url': url_for('api.get_utente', id=self.author_id),
         }
         return json_comment
-
+    
+    # Per la gestione API - Serializing Resources from JSON
     @staticmethod
     def from_json(json_comment):
         body = json_comment.get('body')

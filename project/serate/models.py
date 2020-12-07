@@ -33,6 +33,18 @@ class Serata(db.Model):
             self.descrizione, self.link_registrazione
         )
 
+    # Per la gestione API - Serializing Resources to JSON
+    def to_json(self):
+        json_serata = {
+            "id": self.id,
+            "nome": self.nome,
+            "descrizione": self.descrizione,
+            "data": self.data,
+            "link_partecipazione": self.link_partecipazione,
+            "link_registrazione": self.link_registrazione,
+        }
+        return json_serata
+
     @staticmethod
     def insert_test_serate():
         lista_serate = [

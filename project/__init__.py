@@ -85,6 +85,10 @@ def create_app(config_name):
 
     app.register_blueprint(auth_blueprint, url_prefix="/auth", url_static="../static")
 
+    from project.api import api as api_blueprint
+    app.register_blueprint(api_blueprint, url_prefix='/api/v1')
+
+
     from project.error_pages.routes import error_pages_blueprint
 
     app.register_blueprint(error_pages_blueprint)

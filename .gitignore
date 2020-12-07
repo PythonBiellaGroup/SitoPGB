@@ -2,6 +2,9 @@
 volumes/
 .DS_Store
 
+#Settings files for environments
+*.bat
+
 ##Visual Studio Code Rules ---------
 .vscode/*
 !.vscode/settings.json
