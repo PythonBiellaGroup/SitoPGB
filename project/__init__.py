@@ -32,7 +32,7 @@ login_manager.login_message_category = "info"
 
 
 def create_app():
-    FLASK_CONFIG = os.getenv("FLASK_CONFIG", "development")
+    FLASK_CONFIG = os.getenv("FLASK_CONFIG", "None")
     print(f"App starting using {FLASK_CONFIG} configuration ")
     app = Flask(__name__, static_folder="static")
     app.config.from_object(config[FLASK_CONFIG])

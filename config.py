@@ -60,11 +60,14 @@ class ProdConfig(Config):
     DEBUG = False
 
 
-class ProdSqliteConfig(ProdConfig):
-    def __init__(self):
-        super.__init__.SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-            basedir, "db", "data.sqlite"
-        ) or os.environ.get("SQLALCHEMY_DATABASE_URI")
+class ProdSqliteConfig(Config):
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
+        basedir, "db", "data.sqlite"
+    ) or os.environ.get("SQLALCHEMY_DATABASE_URI")
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
+    MAIL_DEBUG = False
+    DEBUG = False
 
 
 class DevConfig(Config):
@@ -80,10 +83,11 @@ class DevConfig(Config):
 
 
 class DevSqliteConfig(DevConfig):
-    def __init__(self):
-        super.__init__.SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-            basedir, "db", "data.sqlite"
-        )
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "db", "data.sqlite")
+    DEBUG = True
+    # Consiglio di usare https://mailtrap.io/ - Registrati
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
 
 
 class TestConfig(Config):
@@ -100,10 +104,10 @@ class TestConfig(Config):
 
 config = {
     "development": DevConfig,
-    "development_sqlite": DevSqliteConfig,
+    "developmentsqlite": DevSqliteConfig,
     "testing": TestConfig,
     "production": ProdConfig,
-    "production_sqlite": ProdSqliteConfig,
+    "productionsqlite": ProdSqliteConfig,
     "default": DevConfig,
     "None": DevConfig,
 }

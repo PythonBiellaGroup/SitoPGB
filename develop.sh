@@ -3,7 +3,7 @@
 export RECAPTCHA_PUBLIC_KEY="6LcxL_UZAAAAAGOEzIQRc_zPaNQVub35WiR1utkE"
 export RECAPTCHA_PRIVATE_KEY="6LcxL_UZAAAAAJn7gapJSqOPuB_MT13-VoBCPUmP"
 export FLASK_APP="app.py"
-export FLASK_CONFIG="development"
+export FLASK_CONFIG="developmentsqlite"
 export SECRET_KEY="supersupersecretkey"
 export MAIL_USE_TLS="true"
 export MAIL_SERVER="smtp.mailtrap.io"
