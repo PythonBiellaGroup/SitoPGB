@@ -6,10 +6,11 @@ FROM python:3.6-slim-buster
 WORKDIR /usr/src/app
 
 #Set environment variables
-ENV FLASK_CONFIG="production"
-ENV FLASK_APP="app.py"
-ENV TESTING=False
-ENV DEBUG=False
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# install system dependencies
+RUN apt-get update && apt-get install -y netcat
 
 #install dependencies
 RUN pip install --upgrade pip
@@ -18,6 +19,10 @@ RUN pip install -r requirements.txt
 
 #Copy Project
 COPY . /usr/src/app/
+
+#Entrypoint.sh to run the bash script for db
+#remember to set permissions to the file: chmod +x ./entrypoint.sh
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 
 
 

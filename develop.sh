@@ -1,0 +1,11 @@
+set RECAPTCHA_PUBLIC_KEY=6LcxL_UZAAAAAGOEzIQRc_zPaNQVub35WiR1utkE
+set RECAPTCHA_PRIVATE_KEY=6LcxL_UZAAAAAJn7gapJSqOPuB_MT13-VoBCPUmP
+set FLASK_APP=app.py
+set FLASK_CONFIG=development
+set SECRET_KEY=supersupersecretkey
+set MAIL_USE_TLS=true
+set MAIL_SERVER=smtp.mailtrap.io
+set MAIL_USERNAME=9a973adb59007f
+set MAIL_PASSWORD=4f5fd306232d45
+set MAIL_PORT=2525
+set PBG_ADMIN=burlesco70@test.it

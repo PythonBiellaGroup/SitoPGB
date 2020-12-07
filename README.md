@@ -56,7 +56,11 @@ Per lanciare l'applicazione in sviluppo è necessario configurare due variabili 
 
 Su Linux o Mac OS è sufficiente fare:
 ```
-export FLASK_CONFIG="development" & FLASK_APP="app.py" python app.py
+#Usando db postgres
+export FLASK_CONFIG=development & export FLASK_APP=app.py & export DEBUG=True & flask run -h 0.0.0.0
+
+#usando db sqlite
+export FLASK_CONFIG=development_sqlite & export FLASK_APP=app.py & export DEBUG=True & flask run -h 0.0.0.0
 ```
 
 Per lanciare invece il docker contenente l'applicazione è necessario lanciare i seguenti comandi dopo esserti posizionato all'interno della cartella di progetto con il terminale
@@ -75,4 +79,16 @@ docker logs -t <nomecontainer>
 
 #per lanciare direttamente il dockerfile dopo averlo buildato (a scopo di test)
 docker run -d --name sitopgb_web_test -p 5000:5000 -e "FLASK_APP=app.py" -e "FLASK_ENV=production" sitopgb_web flask run /usr/src/app/app.py --host 0.0.0.0
+```
+
+Per lanciare il DB di Postgres generando le tabelle in locale è necessario fare da terminale:
+```
+#Mac or Linux
+export FLASK_CONFIG="development" & export FLASK_APP="app.py" & export DEBUG=True & flask create_db
+
+```
+
+Per lanciare il progetto in locale in modalità sviluppo dopo aver generato le tabelle sul db di postgres è possibile fare da terminale:
+```
+export FLASK_CONFIG=development & export FLASK_APP=app.py & flask run -h 0.0.0.0
 ```

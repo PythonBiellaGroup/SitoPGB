@@ -4,9 +4,25 @@ services:
   web:
     build: .      
     restart: always
-    command: flask run -h 0.0.0.0    
+    #command: flask run -h 0.0.0.0    
+    command: python app.py
     #TODO: Problem with sqlite and volumes
     # volumes:
     #   - ./volumes/db/:/usr/src/app/db
     ports:
-      - 5000:5000    
+      - 5000:5000
+    env_file:
+      - ./prod.env
+    depends_on:
+      - db
+  db:
+    image: postgres:12-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./dev_db.env
+    
+volumes:
+  postgres_data:
