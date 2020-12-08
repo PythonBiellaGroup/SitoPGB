@@ -54,7 +54,8 @@ class Config(object):
 
 
 class ProdConfig(Config):
-
+    # Per Heroku Postgress
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     # configuration for gmail account
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
