@@ -150,8 +150,8 @@ def create_db():
         print("Creating roles")
         Ruolo.insert_roles()
 
-        print("Creating fake users")
-        users(3)
+        #print("Creating fake users")
+        #users(3)
 
         print("Creating test users")
         Utente.insert_test_users()
@@ -166,10 +166,10 @@ def create_db():
         Serata.insert_test_serate()
 
         print("Creating posts fake")
-        posts(3)
+        #posts(3)
 
         print("Creating commenti fake")
-        comments(3)
+        #comments(3)
 
         print("\nDB Dummy data inserted succesfully")
 
