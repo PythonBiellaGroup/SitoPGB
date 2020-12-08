@@ -71,8 +71,38 @@ def test():
 
 @app.cli.command("create_db")
 def create_db():
+    app = create_app()
 
-    print("Start creating db")
+    from project.serate.models import Serata
+    from project.corsi.models import Corso
+    from project.tags.models import Tag
+    from project.ruoli.models import Ruolo
+    from project.utenti.models import Utente
+    from project.blog.models import Post
+    from project.commenti.models import Comment
+
+    print("Start creating structure")    
+    db.create_all()
+    print("Start creating roles")
+    Ruolo.insert_roles()
+    
+    #print("Start creating users")
+    #Utente.insert_test_users()
+
+    print("Start creating tags")
+    Tag.insert_test_tags()
+
+    print("Start creating corsi")
+    Corso.insert_test_corsi()
+    
+    print("Start creating serate")
+    Serata.insert_test_serate()
+
+
+@app.cli.command("create_test_db")
+def create_test_db():
+
+    print("Start creating test db")
 
     from project.serate.models import Serata
     from project.corsi.models import Corso
@@ -151,7 +181,7 @@ def create_db():
         Ruolo.insert_roles()
 
         #print("Creating fake users")
-        #users(3)
+        users(2)
 
         print("Creating test users")
         Utente.insert_test_users()
@@ -166,10 +196,10 @@ def create_db():
         Serata.insert_test_serate()
 
         print("Creating posts fake")
-        #posts(3)
+        posts(3)
 
         print("Creating commenti fake")
-        #comments(3)
+        comments(3)
 
         print("\nDB Dummy data inserted succesfully")
 
