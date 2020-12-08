@@ -58,7 +58,7 @@ class ProdConfig(Config):
     # configuration for gmail account
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_DEBUG = False
+    #MAIL_DEBUG = False
     DEBUG = False
 
 
@@ -71,7 +71,7 @@ class ProdSqliteConfig(Config):
     # Configurazione per gmail account
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_DEBUG = False
+    #MAIL_DEBUG = False
     DEBUG = False
 
 class DevConfig(Config):
@@ -88,7 +88,7 @@ class DevConfig(Config):
 
 class DevSqliteConfig(Config):
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "data.sqlite")
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "devdata.sqlite")
     # overwrite config for production environment
     # Configurazione per gmail account
     MAIL_USE_TLS = False
@@ -99,7 +99,7 @@ class DevSqliteConfig(Config):
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
-        basedir, "db", "testdata.sqlite"
+        basedir, "testdata.sqlite"
     )
     # To test configuration usage in unit test
     TESTING = True
@@ -107,6 +107,7 @@ class TestConfig(Config):
     WTF_CSRF_ENABLED = False
     # test admin
     PBG_ADMIN = "test1@test.it"
+    MAIL_DEBUG = False
 
 
 config = {

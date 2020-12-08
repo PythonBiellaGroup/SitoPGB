@@ -20,7 +20,8 @@ from flask import render_template
 from flask_migrate import Migrate
 
 
-app = create_app()
+#app = create_app()
+app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
 # Create db and migrations
 Migrate(app, db)
@@ -68,10 +69,15 @@ def test():
     tests = unittest.TestLoader().discover("tests")
     unittest.TextTestRunner(verbosity=2).run(tests)
 
-
+"""
+Creazione del DB senza utenti e post, ideale per la produzione
+"""
 @app.cli.command("create_db")
 def create_db():
-    app = create_app()
+    FLASK_CONFIG = os.getenv("FLASK_CONFIG", "None")
+    app = create_app(FLASK_CONFIG)
+    app_context = app.app_context()
+    app_context.push()
 
     from project.serate.models import Serata
     from project.corsi.models import Corso
@@ -84,25 +90,28 @@ def create_db():
     print("Start creating structure")    
     db.create_all()
     print("Start creating roles")
-    Ruolo.insert_roles()
-    
-    #print("Start creating users")
-    #Utente.insert_test_users()
-
+    Ruolo.insert_roles() 
     print("Start creating tags")
     Tag.insert_test_tags()
-
     print("Start creating corsi")
-    Corso.insert_test_corsi()
-    
+    Corso.insert_test_corsi()    
     print("Start creating serate")
     Serata.insert_test_serate()
 
+    db.session.remove()
+    app_context.pop()
 
+
+"""
+Creazione del DB con utenti, post e commenti, ideale per vedere l'app in uso
+"""
 @app.cli.command("create_test_db")
 def create_test_db():
-
     print("Start creating test db")
+    FLASK_CONFIG = os.getenv("FLASK_CONFIG", "None")
+    app = create_app(FLASK_CONFIG)
+    app_context = app.app_context()
+    app_context.push()
 
     from project.serate.models import Serata
     from project.corsi.models import Corso
@@ -180,7 +189,7 @@ def create_test_db():
         print("Creating roles")
         Ruolo.insert_roles()
 
-        #print("Creating fake users")
+        print("Creating fake users")
         users(2)
 
         print("Creating test users")
@@ -202,17 +211,18 @@ def create_test_db():
         comments(3)
 
         print("\nDB Dummy data inserted succesfully")
+    db.session.remove()
+    app_context.pop()
 
 
 """
 Prova "flask pippo" :-)
 """
-
-
 @app.cli.command()
 def pippo():
     print("Bravo! Hai capito come funziona il decorator cli di flask")
 
+# Per visualizzare facilmente tutte le configurazioni
 print(app.config)
 if __name__ == "__main__":
     app.run()

@@ -27,7 +27,6 @@ class FlaskModelTestCase(unittest.TestCase):
 
     def test_check_tag(self):
         t = Tag.query.filter_by(name="Python").first()
-        #print(t)
         self.assertTrue(t.name == "Python")
 
     def test_check_corso(self):

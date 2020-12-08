@@ -31,12 +31,19 @@ login_manager.login_message = "Autenticati per vedere questa pagina"
 login_manager.login_message_category = "info"
 
 
-def create_app():
+def create_app(config_name):
+    app = Flask(__name__, static_folder="static")
+    '''
     FLASK_CONFIG = os.getenv("FLASK_CONFIG", "None")
     print(f"App starting using {FLASK_CONFIG} configuration ")
-    app = Flask(__name__, static_folder="static")
     app.config.from_object(config[FLASK_CONFIG])
     config[FLASK_CONFIG].init_app(app)
+    
+    '''
+    app.config.from_object(config[config_name])
+    print(f"App starting using {config_name} configuration ")
+    config[config_name].init_app(app)
+
     bootstrap.init_app(app)
     pagedown.init_app(app)
     mail.init_app(app)
