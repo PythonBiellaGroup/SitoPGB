@@ -183,6 +183,6 @@ Prova "flask pippo" :-)
 def pippo():
     print("Bravo! Hai capito come funziona il decorator cli di flask")
 
-
+print(app.config)
 if __name__ == "__main__":
     app.run()

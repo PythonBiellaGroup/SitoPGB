@@ -26,9 +26,10 @@ class Config(object):
     # Mail
     MAIL_SERVER = os.environ.get("MAIL_SERVER", "smtp.googlemail.com")
     MAIL_PORT = int(os.environ.get("MAIL_PORT", "587"))
-    MAIL_USE_TLS = os.environ.get("MAIL_USE_TLS", "true").lower() in ["true", "on", "1"]
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    # MAIL_USE_TLS da valorizzare in ciascun ambiente in base al mail provider
+    # MAIL_USE_SSL da valorizzare in ciascun ambiente in base al mail provider
 
     # Costanti usati nelle mail registrazione utenti
     PBG_MAIL_SUBJECT_PREFIX = "[Python Biella Group]"
@@ -54,9 +55,9 @@ class Config(object):
 
 class ProdConfig(Config):
 
-    # overwrite config for production environment
-    MAIL_USE_TLS = True
-    MAIL_USE_SSL = False
+    # configuration for gmail account
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
     MAIL_DEBUG = False
     DEBUG = False
 
@@ -66,11 +67,12 @@ class ProdSqliteConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
         basedir, "data.sqlite"
     ) or os.environ.get("SQLALCHEMY_DATABASE_URI")
-    MAIL_USE_TLS = True
-    MAIL_USE_SSL = False
+
+    # Configurazione per gmail account
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
     MAIL_DEBUG = False
     DEBUG = False
-
 
 class DevConfig(Config):
     # SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "db", "data.sqlite")
@@ -79,7 +81,7 @@ class DevConfig(Config):
         or "postgresql://pbgadmin:SUPERpswd42..@localhost:5432/pbg"
     )
     DEBUG = True
-    # Consiglio di usare https://mailtrap.io/ - Registrati
+    # Configurazione per mailtrap.io - Registrati
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
 
@@ -88,9 +90,10 @@ class DevSqliteConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "data.sqlite")
     # overwrite config for production environment
-    MAIL_USE_TLS = True
-    MAIL_USE_SSL = False
-    MAIL_DEBUG = False
+    # Configurazione per gmail account
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+    #MAIL_DEBUG = False
     DEBUG = True
 
 

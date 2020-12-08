@@ -1,3 +1,4 @@
+from flask import current_app
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
@@ -29,8 +30,15 @@ class RegistrationForm(FlaskForm):
         Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                'Nome utente deve essere composto solo da lettere, numeri, punti o underscores')])
     password = PasswordField('Password', validators=[
-        DataRequired(message='Password obbligatoria'), EqualTo('password2', message='Le due password devono combaciare')])
-    password2 = PasswordField('Conferma password', validators=[DataRequired(message='Conferma password obbligatoria')])
+        DataRequired(message='Password obbligatoria'),
+        Length(8, 32, 'Minimo 8 caratteri massimo 32 caratteri'),
+        Regexp('(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$', 0,
+               'Password deve contenere almeno un carattere minuscolo, uno maiuscolo, un numero o un carattere speciale'),
+        EqualTo('password2', message='Le due password devono combaciare')
+        ])
+    password2 = PasswordField('Conferma password', validators=[
+        DataRequired(message='Conferma password obbligatoria')
+        ])
     recaptcha = RecaptchaField()
     submit = SubmitField('Registrati')
 
@@ -46,7 +54,12 @@ class RegistrationForm(FlaskForm):
 class ChangePasswordForm(FlaskForm):
     old_password = PasswordField('Vecchia password', validators=[DataRequired(message='Vecchia password obbligatoria')])
     password = PasswordField('Nuova password', validators=[
-        DataRequired(message='Nuova password obbligatoria'), EqualTo('password2', message='Le due passwords devono essere uguali')])
+        DataRequired(message='Nuova password obbligatoria'), 
+        Length(8, 32, 'Minimo 8 caratteri massimo 32 caratteri'),
+        Regexp('(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$', 0,
+               'Password deve contenere almeno un carattere minuscolo, uno maiuscolo, un numero o un carattere speciale'),
+        EqualTo('password2', message='Le due passwords devono essere uguali'),
+        ])
     password2 = PasswordField('Conferma nuova password',
                               validators=[DataRequired(message='Conferma nuova password obbligatoria')])
     submit = SubmitField('Aggiorna password')
