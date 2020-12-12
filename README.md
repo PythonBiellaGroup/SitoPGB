@@ -74,6 +74,15 @@ docker-compose up -d --build
 #per rimuovere i container quando sono stati creati e buildati è possibile fare:
 docker-compose down -v
 ```
+
+Nota importante per gli utenti Windows
+Se in fase di attivazione, il container sitopgb_web_1 non parte e rimane in stato "Restarting", occorre modificare il formato dei files:
+```
+entrypoint.sh
+develop.sh
+```
+in modo da renderli in formato Unix (con LF) (tramite dos2unix.exe o altro tool).
+
 Dopo di che raggiungere l'indirizzo: http://localhost:5000 per visualizzare l'applicazione all'interno del docker container.
 
 Per visualizzare i logs se dovessero esserci errori con docker: 

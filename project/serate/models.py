@@ -106,7 +106,7 @@ class Serata(db.Model):
             ),
             (
                 "Flask 9",
-                "Config, Heruku e Docker: deploy in produzione con Andrea",
+                "Config, Heroku e Docker: deploy in produzione con Andrea",
                 datetime.datetime(2020, 12, 7, hour=20),
                 "https://zoom.us/j/98193137080?pwd=bWFEVm9obEZNc2Rjb2tqSXhTS0xkQT09",
                 "https://vimeo.com/488383614",
