@@ -1,9 +1,5 @@
 """
-Note per la configurazione in PRODUZIONE
-Valorizzare:
-FLASK_APP=app.py
-FLASK_CONFIG=production
-
+Configurazioni
 """
 import os
 from pathlib import Path
@@ -28,12 +24,22 @@ class Config(object):
     MAIL_PORT = int(os.environ.get("MAIL_PORT", "587"))
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
-    # MAIL_USE_TLS da valorizzare in ciascun ambiente in base al mail provider
-    # MAIL_USE_SSL da valorizzare in ciascun ambiente in base al mail provider
+    # MAIL_USE da valorizzare in ciascun ambiente in base al mail provider
+    # per valorizzare i parametri usati dal modulo Flask-Mail
+    # https://pythonhosted.org/Flask-Mail/
+    # Es. SSL per account GMAIL
+    # Es. TSL per account mailtrap.io - Registrati, utile per i test
+    MAIL_USE = os.environ.get("MAIL_USE")
+    if (MAIL_USE == "SSL"):
+        MAIL_USE_TLS = False
+        MAIL_USE_SSL = True
+    if (MAIL_USE == "TLS"):
+        MAIL_USE_TLS = True
+        MAIL_USE_SSL = False
 
     # Costanti usati nelle mail registrazione utenti
     PBG_MAIL_SUBJECT_PREFIX = "[Python Biella Group]"
-    PBG_MAIL_SENDER = "Python Biella Group Admin <pbg@pbg.com>"
+    PBG_MAIL_SENDER = "Python Biella Group Admin"
 
     # Definizione email dell'utente ADMIN iniziale
     PBG_ADMIN = os.environ.get("PBG_ADMIN")
@@ -56,10 +62,6 @@ class Config(object):
 class ProdConfig(Config):
     # Per Heroku Postgress
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-    # configuration for gmail account
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
-    #MAIL_DEBUG = False
     DEBUG = False
 
 
@@ -68,33 +70,17 @@ class ProdSqliteConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(
         basedir, "data.sqlite"
     ) or os.environ.get("SQLALCHEMY_DATABASE_URI")
-
-    # Configurazione per gmail account
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
-    #MAIL_DEBUG = False
     DEBUG = False
 
 class DevConfig(Config):
-    # SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "db", "data.sqlite")
     SQLALCHEMY_DATABASE_URI = (
         os.environ.get("SQLALCHEMY_DATABASE_URI")
         or "postgresql://pbgadmin:SUPERpswd42..@localhost:5432/pbg"
     )
     DEBUG = True
-    # Configurazione per mailtrap.io - Registrati
-    MAIL_USE_TLS = True
-    MAIL_USE_SSL = False
-
 
 class DevSqliteConfig(Config):
-
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "devdata.sqlite")
-    # overwrite config for production environment
-    # Configurazione per gmail account
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
-    #MAIL_DEBUG = False
     DEBUG = True
 
 
@@ -108,8 +94,6 @@ class TestConfig(Config):
     WTF_CSRF_ENABLED = False
     # test admin
     PBG_ADMIN = "test1@test.it"
-    MAIL_DEBUG = False
-
 
 config = {
     "development": DevConfig,

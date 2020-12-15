@@ -83,27 +83,29 @@ def create_db():
     from project.corsi.models import Corso
     from project.tags.models import Tag
     from project.ruoli.models import Ruolo
-    from project.utenti.models import Utente
-    from project.blog.models import Post
-    from project.commenti.models import Comment
 
-    print("Start creating structure")    
-    db.create_all()
-    print("Start creating roles")
-    Ruolo.insert_roles() 
-    print("Start creating tags")
-    Tag.insert_test_tags()
-    print("Start creating corsi")
-    Corso.insert_test_corsi()    
-    print("Start creating serate")
-    Serata.insert_test_serate()
+    try:
+        ruolo_list = Ruolo.query.all()
+
+    except Exception as message:
+        print("No db data")
+        print("Creazione struttura senza utenti, post e commenti")    
+        db.create_all()
+        print("Start creating roles")
+        Ruolo.insert_roles() 
+        print("Start creating tags")
+        Tag.insert_test_tags()
+        print("Start creating corsi")
+        Corso.insert_test_corsi()    
+        print("Start creating serate")
+        Serata.insert_test_serate()
 
     db.session.remove()
     app_context.pop()
 
 
 """
-Creazione del DB con utenti, post e commenti, ideale per vedere l'app in uso
+Creazione del DB con utenti, post e commenti, ideale in sviluppo per vedere l'app in uso
 """
 @app.cli.command("create_test_db")
 def create_test_db():
@@ -135,10 +137,6 @@ def create_test_db():
 
     except Exception as message:
         print(f"No db data exist, inserting them:")
-        # Utilizzo dell'application factory
-        # app = create_app("development")
-        # app_context = app.app_context()
-        # app_context.push()
         def users(count=100):
             fake = Faker("it_IT")
             i = 0

@@ -113,10 +113,10 @@ class Serata(db.Model):
             ),
             (
                 "Flask 10",
-                "REST API con sorpresa",
+                "REST API con Mario",
                 datetime.datetime(2020, 12, 14, hour=20),
-                "",
-                "",
+                "https://zoom.us/j/95665293446?pwd=QWZIaEJ2VTNtRCszc0ZLcy9FKzJHdz09",
+                "https://vimeo.com/491038615",
             ),
         ]
         corso_flask = Corso.query.filter_by(nome="Flask").first()
