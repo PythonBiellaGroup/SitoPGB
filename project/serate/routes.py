@@ -103,6 +103,7 @@ def edit_serata(id):
         data_time = datetime.datetime.strptime(txt_time, '%H:%M').time()
         my_serata.data = datetime.datetime.combine(form_data,data_time)
         my_serata.txt_time = form.txt_time.data
+        my_serata.corso_id = form.select_corsi.data
         my_serata.link_partecipazione = form.link_partecipazione.data
         my_serata.link_registrazione = form.link_registrazione.data
         db.session.add(my_serata)
@@ -114,6 +115,7 @@ def edit_serata(id):
     form.descrizione.data = my_serata.descrizione
     form.data.data = my_serata.data
     form.txt_time.data = my_serata.data.strftime('%H:%M')
+    form.select_corsi.data = my_serata.corso_id
     form.link_partecipazione.data = my_serata.link_partecipazione
     form.link_registrazione.data = my_serata.link_registrazione
     return render_template('serata_edit.html', form=form, serata=my_serata)

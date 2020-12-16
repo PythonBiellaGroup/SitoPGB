@@ -103,6 +103,7 @@ def dettaglio_corso(corso_id):
         descrizione = form.descrizione.data
         link_partecipazione = form.link_partecipazione.data
         link_registrazione = form.link_registrazione.data
+        form_corso_id = form.select_corsi.data
 
         nuova_serata = Serata(
             nome, 
@@ -110,7 +111,7 @@ def dettaglio_corso(corso_id):
             datetime.datetime.combine(data,data_time), # Combino data con ore-minuti
             link_partecipazione,
             link_registrazione)
-        nuova_serata.corso_id = corso_id
+        nuova_serata.corso_id = form_corso_id
         # Reset dei campi della form
         form.data.data = ""
         form.txt_time.data = ""
@@ -118,6 +119,7 @@ def dettaglio_corso(corso_id):
         form.descrizione.data = ""
         form.link_partecipazione.data = ""
         form.link_registrazione.data = ""
+        form.select_corsi.data = corso_id
 
         db.session.add(nuova_serata)
         try:

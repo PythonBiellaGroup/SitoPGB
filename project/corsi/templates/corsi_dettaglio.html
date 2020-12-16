@@ -131,7 +131,7 @@
   <!--Aggiungi serate-->
   <div class="container text-center">
     <br>
-    <h1>Aggiungi serata per {{ corso.nome }}</h1>
+    <h1>Aggiungi serata</h1>
     <br>
   </div>
 
@@ -214,6 +214,12 @@
                   <div class="form-group">
                     <input type="text" class="form-control" id="descrizione" name="descrizione"
                            placeholder="Descrizione della serata" required>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="bootstrap-select-wrapper" id="select_corsi" name="select_corsi">
+                      <label for="select_corsi" >Corso collegato</label>
+                      {{ form.select_corsi(class_='form-control') }}
                   </div>
 
                   <div class="form-group">

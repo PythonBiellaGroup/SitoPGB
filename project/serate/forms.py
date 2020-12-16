@@ -12,6 +12,9 @@ from wtforms import (
     DateField
 )
 from wtforms.validators import DataRequired, Length
+from sqlalchemy import desc,asc
+
+from project.corsi.models import Corso
 
 '''
 Serata Form
@@ -25,6 +28,9 @@ class SerataForm(FlaskForm):
         u'Descrizione', 
         validators=[Length(min=-1, max=255, message='Massimo 255 caratteri')]
     )
+
+    select_corsi = SelectField('',coerce=int)
+
     '''
     Nella form data DD/MM/YYYY e ora HH:MM sono due input field separati
     Nella tabella c'è un solo campo
@@ -44,3 +50,11 @@ class SerataForm(FlaskForm):
         validators=[Length(min=-1, max=255, message='Massimo 255 caratteri')]
     )
     submit = SubmitField('Conferma')
+
+    def __init__(self, *args, **kwargs):
+        super(SerataForm, self).__init__(*args, **kwargs)
+        # Caricamento scelte listbox corsi
+        choices = [("0", "Nessun corso abbinato alla serata")]
+        for c in (Corso.query.order_by(asc(Corso.nome)).all()):
+            choices.append((c.id, c.nome))
+        self.select_corsi.choices = choices
