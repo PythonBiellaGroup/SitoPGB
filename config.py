@@ -29,7 +29,7 @@ class Config(object):
     # https://pythonhosted.org/Flask-Mail/
     # Es. SSL per account GMAIL
     # Es. TSL per account mailtrap.io - Registrati, utile per i test
-    MAIL_USE = os.environ.get("MAIL_USE")
+    MAIL_USE = os.environ.get("MAIL_USE", "SSL")
     if (MAIL_USE == "SSL"):
         MAIL_USE_TLS = False
         MAIL_USE_SSL = True

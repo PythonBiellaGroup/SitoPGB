@@ -168,7 +168,8 @@ def password_reset_request():
                        '/email/reset_password',
                        user=user, token=token)
             flash('Una email con istruzioni è stata inviata', 'success')
-            
+        else:
+            flash('Mail non presente in archivio', 'danger')
         return redirect(url_for('auth.login'))
     return render_template('reset_password.html', form=form)
 
