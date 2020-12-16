@@ -112,14 +112,14 @@ def dettaglio_corso(corso_id):
             link_partecipazione,
             link_registrazione)
         nuova_serata.corso_id = form_corso_id
-        # Reset dei campi della form
+        
+        # Reset dei campi della form serate
         form.data.data = ""
         form.txt_time.data = ""
         form.nome.data = ""
         form.descrizione.data = ""
         form.link_partecipazione.data = ""
-        form.link_registrazione.data = ""
-        form.select_corsi.data = corso_id
+        form.link_registrazione.data = ""      
 
         db.session.add(nuova_serata)
         try:
@@ -128,7 +128,8 @@ def dettaglio_corso(corso_id):
         except Exception as e:
             flash("Errore durante l'inserimento della serata: %s" % str(e), 'error')
             db.session.rollback()
-    
+    # Preselezione nel form serate (comunque modificabile) del corso visualizzato
+    form.select_corsi.data = corso_id
     corso = Corso.query.get_or_404(corso_id)
     return render_template('corsi_dettaglio.html', corso=corso, form=form)
 
