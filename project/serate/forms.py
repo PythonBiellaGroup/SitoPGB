@@ -54,7 +54,8 @@ class SerataForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(SerataForm, self).__init__(*args, **kwargs)
         # Caricamento scelte listbox corsi
-        choices = [("0", "Nessun corso abbinato alla serata")]
+        # choices = [("0", "Nessun corso abbinato alla serata")]
+        choices = []
         for c in (Corso.query.order_by(asc(Corso.nome)).all()):
             choices.append((c.id, c.nome))
         self.select_corsi.choices = choices
