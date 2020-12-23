@@ -1,4 +1,4 @@
-#Ignore files to copy inside the container
+# Ignore files to copy inside the container
 volumes
 venv
 __pycache__
