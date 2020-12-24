@@ -78,10 +78,12 @@ class DevConfig(Config):
         or "postgresql://pbgadmin:SUPERpswd42..@localhost:5432/pbg"
     )
     DEBUG = True
+    SEND_FILE_MAX_AGE_DEFAULT = 0
 
 class DevSqliteConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "devdata.sqlite")
     DEBUG = True
+    SEND_FILE_MAX_AGE_DEFAULT = 0
 
 
 class TestConfig(Config):

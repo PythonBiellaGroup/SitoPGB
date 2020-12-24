@@ -21,7 +21,6 @@
     <div class="col-md-10">
       <div class="row align-items-center justify-content-center">
         <h2>Sito del Python Biella Group</h2>
-
       </div>
     </div>
   </div>
@@ -29,18 +28,44 @@
 
 <div class="container">
   <div class="row align-items-center justify-content-center">
-
     <div>
-      {% if current_user.can(Permission.WRITE) %}      
-      <h3>Inserisci un approfondimento, una richiesta o un tuo pensiero "pythonesco"</h3>
-      <p>Puoi usare la sintassi <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a>. Vedrai sotto la preview.</p>
 
-      {{ wtf.quick_form(form, novalidate=True, button_map={'submit':'success'}) }}
+      {% if current_user.can(Permission.WRITE) %}
+      
+      <div class="callout callout-highlight success">
+        <div class="callout-title"><svg class="icon"><use xlink:href="/bootstrap-italia/dist/svg/sprite.svg#it-info-circle"></use></svg>Benvenuto {{ current_user.username }}</div>
+        <p>Inserisci un approfondimento, una richiesta o un tuo pensiero "pythonesco"</p>
+        <p>Puoi usare la sintassi <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a> e vedere subito l'anteprima.</p>
+      </div>
+
+        <!-- Form inserimeto Post-->
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-10">
+                    <form class="form" method="POST" role="form">
+                        {# This hidden_tag is a CSRF security feature. #}
+                        {{ form.hidden_tag() }}  
+                        {{ form.body(rows=10) }}
+                    {#Submit button#}
+                    <div class="row align-items-center justify-content-center">
+                        <button type="submit" class="btn btn-success">Inserisci un post</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+  
       {% else %}
-      <p><a href="{{url_for('auth.login')}}">Accedi</a> o <a href="{{ url_for('auth.register') }}">registrati</a> per inserire nuovi articoli, eventualmente commentarli e vedere tutte le serate.<br>
-      In alternativa puoi vedere le <a href="{{ url_for('serate.prossime') }}">prossime serate</a> in programma o i <a href="{{ url_for('corsi.lista') }}">corsi</a> (passati e futuri).</p>
-      <p>Qui di seguito gli ultimi articoli scritti.</p>
+
+        <div class="callout callout-highlight important">
+            <div class="callout-title"><svg class="icon"><use xlink:href="/bootstrap-italia/dist/svg/sprite.svg#it-info-circle"></use></svg>Importante</div>
+            <p><a href="{{url_for('auth.login')}}">Accedi</a> o <a href="{{ url_for('auth.register') }}">registrati</a> per inserire nuovi articoli, eventualmente commentarli e vedere tutte le serate.<br>
+                In alternativa puoi vedere le <a href="{{ url_for('serate.prossime') }}">prossime serate</a> in programma o i <a href="{{ url_for('corsi.lista') }}">corsi</a> (passati e futuri).</p>
+            <p>Qui di seguito gli ultimi articoli scritti.</p>   
+        </div>
+
       {% endif %}
+ 
     </div>
   </div>
 
